@@ -1,15 +1,33 @@
 {
   "name": "valkyr",
-  "version": "0.0.0",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "vue3 + vite2 + typescript",
+  "author": {
+    "name": "ka1i",
+    "url": "https://github.com/ka1i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ka1i/valkyr"
+  },
+  "bugs": "https://github.com/ka1i/valkyr/issues",
   "scripts": {
     "dev": "vite",
+    "serve": "vite preview",
+    "bootstrap": "pnpm install",
     "build": "run-p type-check build-only",
-    "preview": "vite preview --port 4173",
-    "test:unit": "vitest --environment jsdom",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "test:unit": "vitest --environment jsdom",
+    "reinstall": "npm run clean && npm run bootstrap",
+    "clean:dist": "rm -rf dist",
+    "clean:cache": "rm -rf node_modules",
+    "clean:lock": "rm -rf package-lock.json && rm -rf yarn.lock && rm -rf pnpm-lock.yaml",
+    "clean": "npm run clean:lock && npm run clean:cache && npm run clean:dist"
   },
   "dependencies": {
+    "dayjs": "^1.11.5",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",
     "vue-router": "^4.1.5"
