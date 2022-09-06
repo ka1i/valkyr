@@ -16,6 +16,6 @@ console.log(pkg.name + " app init")
 
 </script>
   
-<style lang="scss">
+<style>
 @import '/@/assets/styles/index.scss'
 </style>

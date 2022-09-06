@@ -5,6 +5,7 @@
             <n-dialog-provider>
                 <DialogContent />
                 <n-notification-provider>
+                    <NotificationContent />
                     <n-message-provider>
                         <MessageContent />
                         <slot></slot>
