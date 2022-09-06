@@ -4,7 +4,7 @@ import App from './App.vue'
 import { setupStore } from '/@/stores'
 import router, { setupRouter } from '/@/router'
 
-import '/@/assets/styles/main.css'
+import '/@/assets/styles/tailwind.css'
 
 async function bootstrap() {
     const app = createApp(App)

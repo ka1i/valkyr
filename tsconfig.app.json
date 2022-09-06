@@ -2,6 +2,8 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": [
     "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
     "src/**/*.vue",
     "types/*.ts",
     "types/*.d.ts",
@@ -25,6 +27,14 @@
       "/@/*": [
         "src/*"
       ],
-    }
+      "/#": [
+        "types"
+      ],
+      "/#/*": [
+        "types/*"
+      ],
+    },
+    "sourceMap": true,
+    "resolveJsonModule": true,
   }
 }

@@ -28,4 +28,5 @@ coverage
 *.sw?
 
 # user wide ignore
+/*.d.ts
 pnpm-lock.yaml

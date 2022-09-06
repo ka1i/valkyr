@@ -20,6 +20,10 @@ const __APP_INFO__ = {
   gitTags: execSync('echo $(git rev-parse --short HEAD)').toString().trim(),
 };
 
+// naive ui
+import Components from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -34,7 +38,10 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     plugins: [
       vue(),
-      vueJsx()
+      vueJsx(),
+      Components({
+        resolvers: [NaiveUiResolver()]
+      })
     ],
     server: {
       port: VITE_PORT,
@@ -61,6 +68,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       alias: {
         "/^": resolve(__dirname, "."),
         "/@": resolve(__dirname, "src"),
+        "/#": resolve(__dirname, "types"),
       },
     },
     define: {

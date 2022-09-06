@@ -48,4 +48,11 @@ declare global {
         VITE_USE_IMAGEMIN: boolean;
         VITE_GENERATE_UI: string;
     }
+
+    interface Window {
+        $dialog: import('naive-ui').DialogApi;
+        $message: import('naive-ui').MessageApi;
+        $loading: import('naive-ui').LoadingBarApi;
+        $notification: import('naive-ui').NotificationApi;
+    }
 }
