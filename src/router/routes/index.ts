@@ -1,21 +1,15 @@
-import LayoutView from '/@/layouts/index.vue'
+import type { RouteRecordRaw } from 'vue-router';
 
-export const routes = [
-    {
-        path: '/',
-        name: 'Layout',
-        component: LayoutView,
-        children: [
-            {
-                path: '/',
-                name: 'Console',
-                component: () => import('/@/views/dashboard/console/index.vue')
-            },
-            {
-                path: '/about',
-                name: 'About',
-                component: () => import('/@/views/sys/About/index.vue')
-            }
-        ]
-    }
-]
+import { LayoutView } from '/@/constant/index'
+import { basicRoutes } from '/@/constant/menu-routes/index'
+
+export const RootRoute: RouteRecordRaw = {
+    path: '/',
+    name: 'Root',
+    component: LayoutView,
+    children: [
+        ...basicRoutes,
+    ]
+}
+
+export const routes: RouteRecordRaw[] = [RootRoute]

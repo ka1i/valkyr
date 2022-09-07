@@ -32,8 +32,10 @@
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.56",
+    "@vicons/antd": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.1",

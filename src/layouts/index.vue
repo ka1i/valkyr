@@ -7,14 +7,14 @@
                 @expand="collapsed = false">
                 <!-- title -->
                 <div class="app-layout-sider_title">
-                    <img alt="Valkyr logo" class="logo" :class="{'mr-2': !collapsed}" src="/@/assets/logo.png"
-                        width="30" height="30" />
+                    <img alt="Valkyr logo" class="logo rounded-full mx-auto" :class="{'mr-2': !collapsed}"
+                        src="/@/assets/logo.png" width="30" height="30" />
                     <span v-show="!collapsed">
                         {{ env.valkyr_app_title }}
                     </span>
                 </div>
                 <!-- 左侧菜单 -->
-                <n-menu :value="activeName" :options="layoutOptions" :collapsed-width="64" :collapsed-icon-size="22"
+                <n-menu :value="activeName" :options="menus" :collapsed-width="64" :collapsed-icon-size="22"
                     @update:value="handleMenuSelect" />
             </n-layout-sider>
             <!-- 右侧区域-->
@@ -35,34 +35,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref, unref } from 'vue';
 import { useRouter } from 'vue-router'
-import type { MenuOption } from 'naive-ui'
 
 import { Header } from './Header/index'
-import { renderIcon } from '/@/utils/index'
 
-import { Home, InformationCircle } from '@vicons/ionicons5'
+import { basicMenu } from '/@/constant/menu-routes/index'
 
-const LAYOUT_ITEMS = [
-    {
-        label: 'Home',
-        key: '/',
-        icon: renderIcon(Home)
-    },
-    {
-        label: 'About',
-        key: '/about',
-        icon: renderIcon(InformationCircle)
-    },
-]
+console.log(basicMenu)
+//const menus = basicMenu
 
 const router = useRouter()
 const env = import.meta.env
 
 const activeName = ref('/')
 const collapsed = ref<boolean>(false)
-const layoutOptions = ref<MenuOption[]>(LAYOUT_ITEMS)
+const menus = ref<any[]>([])
 
 const handleMenuSelect = (value: string) => {
     activeName.value = value
@@ -70,6 +58,42 @@ const handleMenuSelect = (value: string) => {
         path: value,
     })
 }
+
+function InitMenuSelect() {
+    activeName.value = router.currentRoute.value.path
+}
+
+function filterRouter(routerMap: Array<any>) {
+    return routerMap.filter((item) => {
+        return (
+            (item.meta?.hidden || false) != true &&
+            !['/:path(.*)*'].includes(item.path)
+        );
+    });
+}
+
+function generatorMenu(routerMap: Array<any>) {
+    return filterRouter(routerMap).map((item) => {
+        const currentMenu = {
+            ...item,
+            ...item.meta,
+            label: item.meta?.title,
+            key: item.path,
+            icon: item.meta?.icon,
+        };
+        return currentMenu;
+    });
+}
+
+function updateMenu() {
+    menus.value = generatorMenu(basicMenu);
+}
+
+onMounted(() => {
+    InitMenuSelect()
+    updateMenu();
+});
+
 </script>
 
 <style scoped lang="scss">
